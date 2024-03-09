@@ -10,7 +10,7 @@ import {
   ScrollView,
   Button,
   Alert,
-  Appearance, 
+  Appearance,
   useColorScheme,
 } from "react-native";
 import React, { useState, useEffect } from "react";
@@ -55,7 +55,7 @@ const App = () => {
     } catch (error) {
       console.error("Error loading screens", error);
     }
-      
+    
   };
   // 指定された桁数のランダムな文字列を生成する関数
 
@@ -84,10 +84,11 @@ const App = () => {
   };
   const colorScheme = useColorScheme();
 
-  const themeTextStyle = colorScheme === 'light' ? styles.lightThemeText : styles.darkThemeText;
+  const themeTextStyle =
+    colorScheme === "light" ? styles.lightThemeText : styles.darkThemeText;
   const themeContainerStyle =
-    colorScheme === 'light' ? styles.lightContainer : styles.darkContainer;
-  const [text, setText] = useState('') 
+    colorScheme === "light" ? styles.lightContainer : styles.darkContainer;
+  const [text, setText] = useState("");
 
   return (
     <NavigationContainer>
@@ -114,40 +115,41 @@ const App = () => {
         ))}
       </Stack.Navigator>
     </NavigationContainer>
-
+  );
+};
 export default App;
 
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: '#222',
+    backgroundColor: "#222",
   },
   container: {
     flex: 1,
     paddingTop: 20,
   },
   button: {
-    backgroundColor: 'rgb(29, 161, 242)',
+    backgroundColor: "rgb(29, 161, 242)",
     paddingHorizontal: 20,
     paddingVertical: 15,
     borderRadius: 20,
   },
   buttonText: {
-    color: 'white',
-    fontWeight: '900',
+    color: "white",
+    fontWeight: "900",
     fontSize: 16,
   },
   inputContainer: {
-    flexDirection: 'row',
+    flexDirection: "row",
     paddingHorizontal: 10,
   },
   input: {
     flex: 1,
-    borderColor: 'rgb(29, 161, 242)',
+    borderColor: "rgb(29, 161, 242)",
     borderWidth: 2,
     marginRight: 10,
     borderRadius: 10,
-    color: 'white',
+    color: "white",
     paddingHorizontal: 10,
     fontSize: 16,
   },
@@ -155,19 +157,19 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   contentText: {
-    color: 'white',
+    color: "white",
     fontSize: 22,
   },
   lightContainer: {
-    backgroundColor: '#d0d0c0',
+    backgroundColor: "#d0d0c0",
   },
   darkContainer: {
-    backgroundColor: '#242c40',
+    backgroundColor: "#242c40",
   },
   lightThemeText: {
-    color: '#242c40',
+    color: "#242c40",
   },
   darkThemeText: {
-    color: '#d0d0c0',
+    color: "#d0d0c0",
   },
 });
