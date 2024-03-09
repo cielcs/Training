@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView, TextInput } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView, TextInput, Appearance, useColorScheme } from 'react-native';
 import React, { useState } from 'react';
 
 
@@ -18,10 +18,15 @@ function Input(props) {
 }
 
 export default function App() {
+  const colorScheme = useColorScheme();
+
+  const themeTextStyle = colorScheme === 'light' ? styles.lightThemeText : styles.darkThemeText;
+  const themeContainerStyle =
+    colorScheme === 'light' ? styles.lightContainer : styles.darkContainer;
   const [text, setText] = useState('')
   return (
     <SafeAreaView style={styles.safeArea}>
-      <View style={styles.container}>
+      <View style={[styles.container, themeContainerStyle]}>
         <Input setState={setText}/>
         <View style={styles.content}>
           <Text style={styles.contentText}>筋肉 {text}</Text>
@@ -72,5 +77,17 @@ const styles = StyleSheet.create({
   contentText: {
     color: 'white',
     fontSize: 22,
-  }
+  },
+  lightContainer: {
+    backgroundColor: '#d0d0c0',
+  },
+  darkContainer: {
+    backgroundColor: '#242c40',
+  },
+  lightThemeText: {
+    color: '#242c40',
+  },
+  darkThemeText: {
+    color: '#d0d0c0',
+  },
 });
