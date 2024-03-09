@@ -84,10 +84,11 @@ const App = () => {
   };
   const colorScheme = useColorScheme();
 
-  const themeTextStyle = colorScheme === 'light' ? styles.lightThemeText : styles.darkThemeText;
+  const themeTextStyle =
+    colorScheme === 'light' ? styles.lightThemeText : styles.darkThemeText;
   const themeContainerStyle =
     colorScheme === 'light' ? styles.lightContainer : styles.darkContainer;
-  const [text, setText] = useState('') 
+  const [text, setText] = useState('');
 
   return (
     <NavigationContainer>
@@ -114,6 +115,8 @@ const App = () => {
         ))}
       </Stack.Navigator>
     </NavigationContainer>
+  );
+};
 
 export default App;
 
