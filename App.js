@@ -28,62 +28,7 @@ const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const App = () => {
-  const generateRandomString = (length) => {
-    let result = "";
-    const characters =
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    const charactersLength = characters.length;
-    for (let i = 0; i < length; i++) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    return result;
-  };
-  const [screens, setScreens] = useState([
-    { id: generateRandomString(10), title: "ベンチプレス" },
-    { id: generateRandomString(10), title: "pull up" },
-  ]);
-
-  // アプリ起動時に保存されたデータを読み込む;
-  useEffect(() => {
-    loadScreens();
-  }, []);
-  // スクリーンの読み込み;
-  const loadScreens = async () => {
-    try {
-      const storedScreens = await AsyncStorage.getItem("screens");
-      if (storedScreens !== null) {
-        setScreens(JSON.parse(storedScreens));
-      }
-    } catch (error) {
-      console.error("Error loading screens", error);
-    }
-      
-  };
-  // 指定された桁数のランダムな文字列を生成する関数
-
-  const addScreen = async (title) => {
-    const newScreenId = generateRandomString(10);
-    const newScreen = { id: newScreenId, title: title };
-    const updatedScreens = [...screens, newScreen];
-    setScreens(updatedScreens);
-    // AsyncStorageにデータを保存する
-    try {
-      await AsyncStorage.setItem("screens", JSON.stringify(updatedScreens));
-    } catch (error) {
-      console.error("Error saving screens", error);
-    }
-  };
-
-  const deleteScreen = async (screenId) => {
-    const updatedScreens = screens.filter((screen) => screen.id !== screenId);
-    console.log(updatedScreens);
-    setScreens(updatedScreens);
-    try {
-      await AsyncStorage.setItem("screens", JSON.stringify(updatedScreens));
-    } catch (error) {
-      console.error("Error saving screens", error);
-    }
-  };
+  
   const colorScheme = useColorScheme();
 
   const themeTextStyle =
@@ -101,7 +46,7 @@ const App = () => {
         />
         <Tab.Screen  
           name="Menu"
-          component={ScreenHome}
+          component={ScreenMenu}
         />
       </Tab.Navigator>
       {/* <Stack.Navigator>
