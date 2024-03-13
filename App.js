@@ -19,11 +19,13 @@ import { v4 as uuidv4 } from "uuid";
 import { getRandomBase64 } from "react-native-get-random-values";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import ScreenMenu from "./Screen/ScreenMenu";
 import ScreenHome from "./Screen/ScreenHome";
 import ScreenTmp from "./Screen/ScreenTmp";
 const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
 
 const App = () => {
   const generateRandomString = (length) => {
@@ -92,7 +94,17 @@ const App = () => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Tab.Navigator>
+        <Tab.Screen
+          name="Home"
+          component={ScreenHome} 
+        />
+        <Tab.Screen  
+          name="Menu"
+          component={ScreenHome}
+        />
+      </Tab.Navigator>
+      {/* <Stack.Navigator>
         <Stack.Screen name="ScreenHome" component={ScreenHome} />
         <Stack.Screen name="ScreenMenu" options={{ title: "ScreenMenu" }}>
           {(props) => (
@@ -113,7 +125,7 @@ const App = () => {
             {(props) => <ScreenTmp {...props} screenId={screen.id} />}
           </Stack.Screen>
         ))}
-      </Stack.Navigator>
+      </Stack.Navigator> */}
     </NavigationContainer>
   );
 };
