@@ -1,7 +1,7 @@
 // ScreenMenu.js
 import React, { useState, useEffect} from "react";
 import { View, Text, Button, TextInput, StyleSheet } from "react-native";
-import { Swipeable } from "react-native-gesture-handler";
+import { Swipeable, GestureHandlerRootView } from "react-native-gesture-handler";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const ScreenMenu = ({props}) => {
@@ -88,6 +88,7 @@ const ScreenMenu = ({props}) => {
 
   const renderScreenItem = (screen) => {
     return (
+      <GestureHandlerRootView>
       <Swipeable
         renderRightActions={() => (
           <Button
@@ -104,6 +105,7 @@ const ScreenMenu = ({props}) => {
           />
         </View>
       </Swipeable>
+      </GestureHandlerRootView>
     );
   };
   return (
