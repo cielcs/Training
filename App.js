@@ -24,6 +24,9 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import ScreenMenu from "./Screen/ScreenMenu";
 import ScreenHome from "./Screen/ScreenHome";
 import ScreenTmp from "./Screen/ScreenTmp";
+import Ionicons from '@expo/vector-icons/Ionicons';
+import { Entypo, FontAwesome6 } from '@expo/vector-icons';
+
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -42,11 +45,21 @@ const App = () => {
       <Tab.Navigator>
         <Tab.Screen
           name="Home"
-          component={ScreenHome} 
+          component={ScreenHome}
+          options={{
+            tabBarIcon: ({color, size}) => (
+              <Entypo name="home" size={size} color={color} />
+            ),
+          }}
         />
         <Tab.Screen  
           name="Menu"
           component={ScreenMenu}
+          options={{
+            tabBarIcon: ({color, size}) => (
+              <FontAwesome6 name="dumbbell" size={size} color={color} />
+            ),
+          }}
         />
       </Tab.Navigator>
       {/* <Stack.Navigator>
