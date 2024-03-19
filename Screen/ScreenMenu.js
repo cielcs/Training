@@ -1,11 +1,69 @@
 // ScreenMenu.js
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 import { View, Text, Button, TextInput, StyleSheet } from "react-native";
-import { Swipeable } from "react-native-gesture-handler";
+import { Swipeable, GestureHandlerRootView } from "react-native-gesture-handler";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const ScreenMenu = ({ navigation, screens, addScreen, deleteScreen }) => {
+const ScreenMenu = ({props}) => {
+
   const [newScreenTitle, setNewScreenTitle] = useState("");
+
+  const generateRandomString = (length) => {
+    let result = "";
+    const characters =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    const charactersLength = characters.length;
+    for (let i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+  };
+  const [screens, setScreens] = useState([
+    { id: generateRandomString(10), title: "ベンチプレス" },
+    { id: generateRandomString(10), title: "pull up" },
+  ]);
+
+  // アプリ起動時に保存されたデータを読み込む;
+  useEffect(() => {
+    loadScreens();
+  }, []);
+  // スクリーンの読み込み;
+  const loadScreens = async () => {
+    try {
+      const storedScreens = await AsyncStorage.getItem("screens");
+      if (storedScreens !== null) {
+        setScreens(JSON.parse(storedScreens));
+      }
+    } catch (error) {
+      console.error("Error loading screens", error);
+    }
+      
+  };
+  // 指定された桁数のランダムな文字列を生成する関数
+
+  const addScreen = async (title) => {
+    const newScreenId = generateRandomString(10);
+    const newScreen = { id: newScreenId, title: title };
+    const updatedScreens = [...screens, newScreen];
+    setScreens(updatedScreens);
+    // AsyncStorageにデータを保存する
+    try {
+      await AsyncStorage.setItem("screens", JSON.stringify(updatedScreens));
+    } catch (error) {
+      console.error("Error saving screens", error);
+    }
+  };
+
+  const deleteScreen = async (screenId) => {
+    const updatedScreens = screens.filter((screen) => screen.id !== screenId);
+    console.log(updatedScreens);
+    setScreens(updatedScreens);
+    try {
+      await AsyncStorage.setItem("screens", JSON.stringify(updatedScreens));
+    } catch (error) {
+      console.error("Error saving screens", error);
+    }
+  };
 
   const handleAddScreen = () => {
     if (newScreenTitle.trim() !== "") {
@@ -30,6 +88,7 @@ const ScreenMenu = ({ navigation, screens, addScreen, deleteScreen }) => {
 
   const renderScreenItem = (screen) => {
     return (
+      <GestureHandlerRootView>
       <Swipeable
         renderRightActions={() => (
           <Button
@@ -46,6 +105,7 @@ const ScreenMenu = ({ navigation, screens, addScreen, deleteScreen }) => {
           />
         </View>
       </Swipeable>
+      </GestureHandlerRootView>
     );
   };
   return (
@@ -61,7 +121,7 @@ const ScreenMenu = ({ navigation, screens, addScreen, deleteScreen }) => {
         <View key={screen.id}>{renderScreenItem(screen)}</View>
       ))}
       <Button title="Add" onPress={handleAddScreen} />
-      <Button title="Go back" onPress={() => navigation.goBack()} />
+      {/* <Button title="Go back" onPress={() => navigation.goBack()} /> */}
     </View>
   );
 };
