@@ -10,7 +10,7 @@ import {
   ScrollView,
   Button,
   Alert,
-  Appearance, 
+  Appearance,
   useColorScheme,
 } from "react-native";
 import React, { useState, useEffect } from "react";
@@ -24,66 +24,29 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import ScreenMenu from "./Screen/ScreenMenu";
 import ScreenHome from "./Screen/ScreenHome";
 import ScreenTmp from "./Screen/ScreenTmp";
-import Ionicons from '@expo/vector-icons/Ionicons';
-import { Entypo, FontAwesome6 } from '@expo/vector-icons';
+
+import Ionicons from "@expo/vector-icons/Ionicons";
+import { Entypo, FontAwesome6 } from "@expo/vector-icons";
+import BottomTabNavigator from "./BottomTabNavi";
+import StackNavigator from "./StackNavi";
+
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const App = () => {
-  
+
   const colorScheme = useColorScheme();
 
   const themeTextStyle =
-    colorScheme === 'light' ? styles.lightThemeText : styles.darkThemeText;
+    colorScheme === "light" ? styles.lightThemeText : styles.darkThemeText;
   const themeContainerStyle =
-    colorScheme === 'light' ? styles.lightContainer : styles.darkContainer;
-  const [text, setText] = useState('');
+    colorScheme === "light" ? styles.lightContainer : styles.darkContainer;
+  const [text, setText] = useState("");
 
   return (
     <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen
-          name="Home"
-          component={ScreenHome}
-          options={{
-            tabBarIcon: ({color, size}) => (
-              <Entypo name="home" size={size} color={color} />
-            ),
-          }}
-        />
-        <Tab.Screen  
-          name="Menu"
-          component={ScreenMenu}
-          options={{
-            tabBarIcon: ({color, size}) => (
-              <FontAwesome6 name="dumbbell" size={size} color={color} />
-            ),
-          }}
-        />
-      </Tab.Navigator>
-      {/* <Stack.Navigator>
-        <Stack.Screen name="ScreenHome" component={ScreenHome} />
-        <Stack.Screen name="ScreenMenu" options={{ title: "ScreenMenu" }}>
-          {(props) => (
-            <ScreenMenu
-              {...props}
-              screens={screens}
-              addScreen={addScreen}
-              deleteScreen={deleteScreen}
-            />
-          )}
-        </Stack.Screen>
-        {screens.map((screen) => (
-          <Stack.Screen
-            key={screen.id}
-            name={screen.id} // 一意の名前に変更する
-            options={{ title: screen.title }}
-          >
-            {(props) => <ScreenTmp {...props} screenId={screen.id} />}
-          </Stack.Screen>
-        ))}
-      </Stack.Navigator> */}
+      <StackNavigator />
     </NavigationContainer>
   );
 };
@@ -92,34 +55,34 @@ export default App;
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: '#222',
+    backgroundColor: "#222",
   },
   container: {
     flex: 1,
     paddingTop: 20,
   },
   button: {
-    backgroundColor: 'rgb(29, 161, 242)',
+    backgroundColor: "rgb(29, 161, 242)",
     paddingHorizontal: 20,
     paddingVertical: 15,
     borderRadius: 20,
   },
   buttonText: {
-    color: 'white',
-    fontWeight: '900',
+    color: "white",
+    fontWeight: "900",
     fontSize: 16,
   },
   inputContainer: {
-    flexDirection: 'row',
+    flexDirection: "row",
     paddingHorizontal: 10,
   },
   input: {
     flex: 1,
-    borderColor: 'rgb(29, 161, 242)',
+    borderColor: "rgb(29, 161, 242)",
     borderWidth: 2,
     marginRight: 10,
     borderRadius: 10,
-    color: 'white',
+    color: "white",
     paddingHorizontal: 10,
     fontSize: 16,
   },
@@ -127,19 +90,19 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   contentText: {
-    color: 'white',
+    color: "white",
     fontSize: 22,
   },
   lightContainer: {
-    backgroundColor: '#d0d0c0',
+    backgroundColor: "#d0d0c0",
   },
   darkContainer: {
-    backgroundColor: '#242c40',
+    backgroundColor: "#242c40",
   },
   lightThemeText: {
-    color: '#242c40',
+    color: "#242c40",
   },
   darkThemeText: {
-    color: '#d0d0c0',
+    color: "#d0d0c0",
   },
 });

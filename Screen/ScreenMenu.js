@@ -1,10 +1,14 @@
 // ScreenMenu.js
-import React, { useState, useEffect} from "react";
+
+import React, { useState, useEffect } from "react";
 import { View, Text, Button, TextInput, StyleSheet } from "react-native";
-import { Swipeable, GestureHandlerRootView } from "react-native-gesture-handler";
+import {
+  Swipeable,
+  GestureHandlerRootView,
+} from "react-native-gesture-handler";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const ScreenMenu = ({props}) => {
+const ScreenMenu = ({ props }) => {
 
   const [newScreenTitle, setNewScreenTitle] = useState("");
 
@@ -37,7 +41,7 @@ const ScreenMenu = ({props}) => {
     } catch (error) {
       console.error("Error loading screens", error);
     }
-      
+
   };
   // 指定された桁数のランダムな文字列を生成する関数
 
@@ -89,22 +93,24 @@ const ScreenMenu = ({props}) => {
   const renderScreenItem = (screen) => {
     return (
       <GestureHandlerRootView>
-      <Swipeable
-        renderRightActions={() => (
-          <Button
-            title="Delete"
-            onPress={() => handleDeleteScreen(screen.id)}
-            color="red"
-          />
-        )}
-      >
-        <View style={styles.screenItem}>
-          <Button
-            title={screen.title}
-            onPress={() => navigation.navigate(screen.id)}
-          />
-        </View>
-      </Swipeable>
+
+        <Swipeable
+          renderRightActions={() => (
+            <Button
+              title="Delete"
+              onPress={() => handleDeleteScreen(screen.id)}
+              color="red"
+            />
+          )}
+        >
+          <View style={styles.screenItem}>
+            <Button
+              title={screen.title}
+              onPress={() => navigation.navigate(screen.id)}
+            />
+          </View>
+        </Swipeable>
+
       </GestureHandlerRootView>
     );
   };
