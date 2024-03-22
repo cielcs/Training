@@ -24,15 +24,18 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import ScreenMenu from "./Screen/ScreenMenu";
 import ScreenHome from "./Screen/ScreenHome";
 import ScreenTmp from "./Screen/ScreenTmp";
+
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Entypo, FontAwesome6 } from "@expo/vector-icons";
 import BottomTabNavigator from "./BottomTabNavi";
 import StackNavigator from "./StackNavi";
 
+
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const App = () => {
+
   const colorScheme = useColorScheme();
 
   const themeTextStyle =
